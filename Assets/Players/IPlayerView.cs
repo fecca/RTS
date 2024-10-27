@@ -3,7 +3,7 @@ using World;
 
 namespace Players
 {
-    public interface IPlayerWorldView : IWorldView<IPlayerWorldPresenter>
+    public interface IPlayerView : IWorldView<IPlayerController>
     {
         void OnPositionChanged(Vector3 position);
     }

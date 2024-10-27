@@ -7,9 +7,9 @@ using World.Ground;
 
 public class GameLifetimeScope : LifetimeScope
 {
-    [SerializeField] private GroundWorldView groundWorldView;
+    [SerializeField] private GroundView groundView;
 
-    [SerializeField] private PlayerWorldView playerWorldView;
+    [SerializeField] private PlayerView playerView;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -28,15 +28,14 @@ public class GameLifetimeScope : LifetimeScope
 
     private void BuildGround(IContainerBuilder builder)
     {
-        builder.Register<GroundModel>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<GroundPresenter>().As<IGroundPresenter>();
-        builder.RegisterComponent(groundWorldView).As<IGroundWorldView>();
+        builder.Register<GroundController>(Lifetime.Singleton).AsImplementedInterfaces();
+        builder.RegisterComponentInNewPrefab(groundView, Lifetime.Singleton).As<IGroundView>();
+        builder.Register<GroundObserverHandler>(Lifetime.Singleton).As<IGroundObserverHandler>();
     }
 
     private void BuildPlayer(IContainerBuilder builder)
     {
-        builder.Register<PlayerModel>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<PlayerWorldPresenter>().As<IPlayerWorldPresenter>();
-        builder.RegisterComponentInNewPrefab(playerWorldView, Lifetime.Scoped).As<IPlayerWorldView>();
+        builder.Register<PlayerController>(Lifetime.Singleton).AsImplementedInterfaces();
+        builder.RegisterComponentInNewPrefab(playerView, Lifetime.Singleton).As<IPlayerView>();
     }
 }
