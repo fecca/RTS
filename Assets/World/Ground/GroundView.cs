@@ -11,11 +11,21 @@ namespace World.Ground
             _controller = controller;
         }
 
-        public void OnInteraction(Vector3 position)
+        public void ShowDeathEffect(Vector3 position)
         {
+            var effect = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            effect.transform.position = position;
+            effect.transform.localScale = Vector3.one * 0.2f;
         }
 
-        public void Interact(Vector3 position)
+        public void ShowInteractionEffect(Vector3 position)
+        {
+            var effect = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            effect.transform.position = position;
+            effect.transform.localScale = Vector3.one * 0.1f;
+        }
+
+        public void InteractWith(Vector3 position)
         {
             _controller.Interact(position);
         }

@@ -14,11 +14,10 @@ namespace World.Ground
             {
                 if (_interactionPosition == value) return;
                 _interactionPosition = value;
-                OnInteraction.Invoke(_interactionPosition);
-                _interactionPosition = default;
+                OnInteractionPositionChange.Invoke(_interactionPosition);
             }
         }
 
-        public event Action<Vector3> OnInteraction = _ => { };
+        public event Action<Vector3> OnInteractionPositionChange = _ => { };
     }
 }

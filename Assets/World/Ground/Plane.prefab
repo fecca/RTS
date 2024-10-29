@@ -140,7 +140,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6577081185051052917}
         m_TargetAssemblyTypeName: World.Ground.GroundWorldView, Assembly-CSharp
-        m_MethodName: Interact
+        m_MethodName: InteractWith
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

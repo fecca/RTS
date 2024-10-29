@@ -1,25 +1,29 @@
 ﻿using System;
+using Players;
 using UnityEngine;
-using VContainer.Unity;
+using VContainer.VContainer.Runtime.Annotations;
 
 namespace World.Ground
 {
-    public class GroundController : IGroundController, IStartable, IGroundObservable
+    public class GroundController : 
+        IGroundController, 
+        IInitializable, 
+        IObservable<GroundModel>,
+        IObserver<PlayerModel>
     {
         private readonly GroundModel _model;
         private readonly IGroundView _view;
 
-        public event Action<Vector3> OnObservedInteractionChange = _ => { };
+        public event Action<GroundModel> OnChange = _ => { };
 
-        public GroundController(IGroundView view, IGroundObserverHandler observerHandler)
+        public GroundController(IGroundView view)
         {
             _view = view;
             _model = new GroundModel();
-            _model.OnInteraction += OnInteraction;
-            observerHandler.Observe(this);
+            _model.OnInteractionPositionChange += OnInteractionPositionChange;
         }
 
-        public void Start()
+        public void Initialize()
         {
             _view.SetController(this);
         }
@@ -29,10 +33,17 @@ namespace World.Ground
             _model.InteractionPosition = position;
         }
 
-        private void OnInteraction(Vector3 clickPosition)
+        private void OnInteractionPositionChange(Vector3 position)
         {
-            _view.OnInteraction(clickPosition);
-            OnObservedInteractionChange.Invoke(clickPosition);
+            _view.ShowInteractionEffect(position);
+            OnChange.Invoke(_model);
+        }
+
+        public void Update(PlayerModel model)
+        {
+            if (!model.IsDead) return;
+
+            _view.ShowDeathEffect(model.Position);
         }
     }
 }

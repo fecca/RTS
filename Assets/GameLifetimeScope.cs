@@ -2,14 +2,17 @@
 using Players;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
+using VContainer.VContainer.Runtime;
+using VContainer.VContainer.Runtime.Annotations;
+using VContainer.VContainer.Runtime.Unity;
 using World.Ground;
 
 public class GameLifetimeScope : LifetimeScope
 {
-    [SerializeField] private GroundView groundView;
-
-    [SerializeField] private PlayerView playerView;
+    [SerializeField]
+    private GroundView groundView;
+    [SerializeField]
+    private PlayerView playerView;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -30,12 +33,13 @@ public class GameLifetimeScope : LifetimeScope
     {
         builder.Register<GroundController>(Lifetime.Singleton).AsImplementedInterfaces();
         builder.RegisterComponentInNewPrefab(groundView, Lifetime.Singleton).As<IGroundView>();
-        builder.Register<GroundObserverHandler>(Lifetime.Singleton).As<IGroundObserverHandler>();
+        builder.Register<ObserverHandler<GroundModel>>(Lifetime.Singleton).AsImplementedInterfaces();
     }
 
     private void BuildPlayer(IContainerBuilder builder)
     {
         builder.Register<PlayerController>(Lifetime.Singleton).AsImplementedInterfaces();
         builder.RegisterComponentInNewPrefab(playerView, Lifetime.Singleton).As<IPlayerView>();
+        builder.Register<ObserverHandler<PlayerModel>>(Lifetime.Singleton).AsImplementedInterfaces();
     }
 }
