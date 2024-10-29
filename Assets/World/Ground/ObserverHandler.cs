@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using VContainer.VContainer.Runtime.Annotations;
+using VContainer.Unity;
 
 namespace World.Ground
 {

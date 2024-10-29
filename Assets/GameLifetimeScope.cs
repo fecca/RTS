@@ -2,9 +2,7 @@
 using Players;
 using UnityEngine;
 using VContainer;
-using VContainer.VContainer.Runtime;
-using VContainer.VContainer.Runtime.Annotations;
-using VContainer.VContainer.Runtime.Unity;
+using VContainer.Unity;
 using World.Ground;
 
 public class GameLifetimeScope : LifetimeScope

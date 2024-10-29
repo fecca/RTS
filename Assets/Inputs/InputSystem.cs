@@ -1,4 +1,4 @@
-﻿using VContainer.VContainer.Runtime.Annotations;
+﻿using VContainer.Unity;
 
 namespace Inputs
 {

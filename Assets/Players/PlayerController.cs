@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using VContainer.VContainer.Runtime.Annotations;
+using VContainer.Unity;
 using World.Ground;
 
 namespace Players
