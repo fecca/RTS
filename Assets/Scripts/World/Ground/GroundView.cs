@@ -29,5 +29,10 @@ namespace World.Ground
         {
             _controller.InteractWith(position);
         }
+
+        public void Dispose()
+        {
+            _controller.Dispose();
+        }
     }
 }

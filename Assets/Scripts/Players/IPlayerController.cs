@@ -1,6 +1,8 @@
-﻿namespace Players
+﻿using System;
+
+namespace Players
 {
-    public interface IPlayerController
+    public interface IPlayerController : IDisposable
     {
     }
 }

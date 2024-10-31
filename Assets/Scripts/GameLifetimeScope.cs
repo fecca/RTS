@@ -29,15 +29,15 @@ public class GameLifetimeScope : LifetimeScope
 
     private void BuildGround(IContainerBuilder builder)
     {
-        builder.Register<GroundController>(Lifetime.Singleton).AsImplementedInterfaces();
-        builder.RegisterComponentInNewPrefab(groundView, Lifetime.Singleton).As<IGroundView>();
-        builder.Register<ObserverHandler<GroundModel>>(Lifetime.Singleton).AsImplementedInterfaces();
+        builder.Register<GroundController>(Lifetime.Scoped).AsImplementedInterfaces();
+        builder.RegisterComponentInNewPrefab(groundView, Lifetime.Scoped).As<IGroundView>();
+        builder.Register<ObserverHandler<GroundModel>>(Lifetime.Scoped).AsImplementedInterfaces();
     }
 
     private void BuildPlayer(IContainerBuilder builder)
     {
-        builder.Register<PlayerController>(Lifetime.Singleton).AsImplementedInterfaces();
-        builder.RegisterComponentInNewPrefab(playerView, Lifetime.Singleton).As<IPlayerView>();
-        builder.Register<ObserverHandler<PlayerModel>>(Lifetime.Singleton).AsImplementedInterfaces();
+        builder.Register<PlayerController>(Lifetime.Scoped).AsImplementedInterfaces();
+        builder.RegisterComponentInNewPrefab(playerView, Lifetime.Scoped).As<IPlayerView>();
+        builder.Register<ObserverHandler<PlayerModel>>(Lifetime.Scoped).AsImplementedInterfaces();
     }
 }

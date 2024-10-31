@@ -22,7 +22,7 @@ namespace DebugOptions
             if (!Input.GetKeyDown(KeyCode.Space)) return;
 
             _groundModel.InteractionPosition = new Vector3(Random.value * 10 - 5, 1, Random.value * 10 - 5);
-            _playerModel.Position = new Vector3(Random.value * 10 - 5, 1, Random.value * 10 - 5);
+            _playerModel.TargetPosition = new Vector3(Random.value * 10 - 5, 1, Random.value * 10 - 5);
         }
     }
 }

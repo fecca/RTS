@@ -4,6 +4,8 @@ namespace Players
 {
     public class PlayerView : MonoBehaviour, IPlayerView
     {
+        [SerializeField] private PlayerMovement playerMovement;
+        
         private IPlayerController _controller;
 
         public void SetController(IPlayerController controller)
@@ -11,9 +13,9 @@ namespace Players
             _controller = controller;
         }
 
-        public void OnPositionChanged(Vector3 position)
+        public void UpdateTargetPosition(Vector3 position)
         {
-            gameObject.transform.position = position + Vector3.up;
+            playerMovement.MoveTo(position);
         }
 
         public void OnHealthChanged(int newHealth)
@@ -24,6 +26,15 @@ namespace Players
         public void OnDeath()
         {
             Destroy(gameObject);
+            Dispose();
+        }
+
+        public Vector3 GetCurrentWorldPosition()
+            => transform.position;
+
+        public void Dispose()
+        {
+            _controller.Dispose();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Players;
-using Unity.VisualScripting;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace World.Ground
 {
@@ -43,7 +43,11 @@ namespace World.Ground
         {
             if (!model.IsDead) return;
 
-            _view.ShowDeathEffect(model.Position);
+            _view.ShowDeathEffect(model.TargetPosition);
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

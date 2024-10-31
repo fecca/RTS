@@ -6,7 +6,7 @@ namespace Players
     public class PlayerModel
     {
         private int _health = 10;
-        private Vector3 _position;
+        private Vector3 _targetPosition;
 
         public int Health
         {
@@ -22,19 +22,19 @@ namespace Players
         
         public bool IsDead => _health <= 0;
 
-        public Vector3 Position
+        public Vector3 TargetPosition
         {
-            get => _position;
+            get => _targetPosition;
             set
             {
-                if (_position == value) return;
-                _position = value;
-                OnPositionChanged.Invoke(_position);
+                if (_targetPosition == value) return;
+                _targetPosition = value;
+                OnTargetPositionChanged.Invoke(_targetPosition);
             }
         }
 
         public event Action<int> OnHealthChanged = _ => { };
         public event Action OnDeath = () => { };
-        public event Action<Vector3> OnPositionChanged = _ => { };
+        public event Action<Vector3> OnTargetPositionChanged = _ => { };
     }
 }

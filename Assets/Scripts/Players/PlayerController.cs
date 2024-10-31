@@ -22,7 +22,7 @@ namespace Players
         {
             _view = view;
             _model = new PlayerModel();
-            _model.OnPositionChanged += UpdatePosition;
+            _model.OnTargetPositionChanged += UpdateTargetPosition;
             _model.OnHealthChanged += UpdateHealth;
             _model.OnDeath += HandleDeath;
         }
@@ -33,16 +33,17 @@ namespace Players
             _startTime = DateTime.Now;
         }
 
-        private void UpdatePosition(Vector3 position)
+        private void UpdateTargetPosition(Vector3 position)
         {
             if (_model.IsDead) return;
             
-            _view.OnPositionChanged(position);
+            _view.UpdateTargetPosition(position);
             OnChange.Invoke(_model);
         }
 
         private void HandleDeath()
         {
+            _model.TargetPosition = _view.GetCurrentWorldPosition();
             _view.OnDeath();
             OnChange.Invoke(_model);
         }
@@ -59,7 +60,7 @@ namespace Players
         {
             if (_model.IsDead) return;
             
-            _model.Position = model.InteractionPosition;
+            _model.TargetPosition = model.InteractionPosition;
         }
 
         public void Tick()
@@ -71,6 +72,10 @@ namespace Players
                 _model.Health -= 1;
                 _startTime = DateTime.Now;
             }
+        }
+
+        public void Dispose()
+        {
         }
     }
 }
