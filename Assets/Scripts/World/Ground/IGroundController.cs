@@ -2,7 +2,7 @@
 
 namespace World.Ground
 {
-    public interface IGroundController : IWorldController
+    public interface IGroundController
     {
         void Interact(Vector3 position);
     }

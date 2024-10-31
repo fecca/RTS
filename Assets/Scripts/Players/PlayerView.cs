@@ -4,12 +4,11 @@ namespace Players
 {
     public class PlayerView : MonoBehaviour, IPlayerView
     {
+        private IPlayerController _controller;
+
         public void SetController(IPlayerController controller)
         {
-        }
-
-        public void OnInteraction(Vector3 position)
-        {
+            _controller = controller;
         }
 
         public void OnPositionChanged(Vector3 position)
