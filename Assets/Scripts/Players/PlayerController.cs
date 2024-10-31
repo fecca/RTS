@@ -22,9 +22,9 @@ namespace Players
         {
             _view = view;
             _model = new PlayerModel();
-            _model.OnPositionChanged += OnPositionChanged;
-            _model.OnHealthChanged += OnHealthChanged;
-            _model.OnDeath += OnDeath;
+            _model.OnPositionChanged += UpdatePosition;
+            _model.OnHealthChanged += UpdateHealth;
+            _model.OnDeath += HandleDeath;
         }
 
         public void Initialize()
@@ -33,7 +33,7 @@ namespace Players
             _startTime = DateTime.Now;
         }
 
-        private void OnPositionChanged(Vector3 position)
+        private void UpdatePosition(Vector3 position)
         {
             if (_model.IsDead) return;
             
@@ -41,13 +41,13 @@ namespace Players
             OnChange.Invoke(_model);
         }
 
-        private void OnDeath()
+        private void HandleDeath()
         {
             _view.OnDeath();
             OnChange.Invoke(_model);
         }
 
-        private void OnHealthChanged(int newHealth)
+        private void UpdateHealth(int newHealth)
         {
             if (_model.IsDead) return;
             

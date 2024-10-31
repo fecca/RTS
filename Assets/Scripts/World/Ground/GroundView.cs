@@ -27,7 +27,7 @@ namespace World.Ground
 
         public void InteractWith(Vector3 position)
         {
-            _controller.Interact(position);
+            _controller.InteractWith(position);
         }
     }
 }

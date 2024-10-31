@@ -4,6 +4,6 @@ namespace World.Ground
 {
     public interface IGroundController
     {
-        void Interact(Vector3 position);
+        void InteractWith(Vector3 position);
     }
 }

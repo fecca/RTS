@@ -20,7 +20,7 @@ namespace World.Ground
         {
             _view = view;
             _model = new GroundModel();
-            _model.OnInteractionPositionChange += OnInteractionPositionChange;
+            _model.OnInteractionPositionChange += UpdateInteractionPosition;
         }
 
         public void Initialize()
@@ -28,12 +28,12 @@ namespace World.Ground
             _view.SetController(this);
         }
 
-        public void Interact(Vector3 position)
+        public void InteractWith(Vector3 position)
         {
             _model.InteractionPosition = position;
         }
 
-        private void OnInteractionPositionChange(Vector3 position)
+        private void UpdateInteractionPosition(Vector3 position)
         {
             _view.ShowInteractionEffect(position);
             OnChange.Invoke(_model);
