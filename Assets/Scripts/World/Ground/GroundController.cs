@@ -39,15 +39,11 @@ namespace World.Ground
             OnChange.Invoke(_model);
         }
 
-        public void Update(PlayerModel model)
+        public void Notify(PlayerModel model)
         {
             if (!model.IsDead) return;
 
             _view.ShowDeathEffect(model.TargetPosition);
-        }
-
-        public void Dispose()
-        {
         }
     }
 }

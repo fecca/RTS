@@ -20,7 +20,7 @@ namespace World.Ground
             {
                 foreach (var observer in _observers)
                 {
-                    observer.Update(model); 
+                    observer.Notify(model); 
                 }
             };
         }

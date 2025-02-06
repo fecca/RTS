@@ -1,6 +1,4 @@
-﻿using System;
-
-public interface IWorldView<in T> : IDisposable
+﻿public interface IWorldView<in T>
 {
     void SetController(T presenter);
 }

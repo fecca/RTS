@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Players
 {
@@ -20,21 +21,15 @@ namespace Players
 
         public void OnHealthChanged(int newHealth)
         {
-            Debug.Log(newHealth);
+            Debug.Log($"Health: {newHealth}");
         }
 
         public void OnDeath()
         {
             Destroy(gameObject);
-            Dispose();
         }
 
         public Vector3 GetCurrentWorldPosition()
             => transform.position;
-
-        public void Dispose()
-        {
-            _controller.Dispose();
-        }
     }
 }

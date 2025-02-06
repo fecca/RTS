@@ -23,16 +23,12 @@ namespace World.Ground
             var effect = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             effect.transform.position = position;
             effect.transform.localScale = Vector3.one * 0.1f;
+            Destroy(effect.gameObject, 0.1f);
         }
 
         public void InteractWith(Vector3 position)
         {
             _controller.InteractWith(position);
-        }
-
-        public void Dispose()
-        {
-            _controller.Dispose();
         }
     }
 }

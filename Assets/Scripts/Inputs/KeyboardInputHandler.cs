@@ -1,17 +1,31 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Inputs
 {
-    public class KeyboardInputHandler : IInputHandler
+    public class KeyboardInputHandler : IInputHandler, IObservable<KeyboardKeyModel>
     {
+        private readonly KeyboardKeyModel _keyboardKeyModel = new();
+
+        public KeyboardInputHandler()
+        {
+            _keyboardKeyModel.OnKeyCodeChange += OnKeyChanged;
+        }
+
+        private void OnKeyChanged(KeyCode keyCode)
+        {
+            OnChange.Invoke(_keyboardKeyModel);
+        }
+
         public void HandleInput()
         {
-            if (Camera.main == null) return;
-            if (!Input.GetKeyDown(KeyCode.Space)) return;
-            var randomPosition = new Vector2(Random.value * 1000f, Random.value * 1000f);
-            if (!Physics.Raycast(Camera.main.ScreenPointToRay(randomPosition), out var hit)) return;
-
-            hit.collider.GetComponent<IInteractable>()?.Interact(hit.point);
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                _keyboardKeyModel.KeyCode = KeyCode.Space;
+                _keyboardKeyModel.KeyCode = KeyCode.None;
+            }
         }
+
+        public event Action<KeyboardKeyModel> OnChange = _ => { };
     }
 }

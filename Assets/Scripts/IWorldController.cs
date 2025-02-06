@@ -1,6 +1,6 @@
 ﻿using System;
 
-public interface IWorldController : IDisposable
+public interface IWorldController
 {
         
 }

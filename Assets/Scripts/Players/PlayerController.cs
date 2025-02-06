@@ -1,4 +1,5 @@
 ﻿using System;
+using Inputs;
 using UnityEngine;
 using VContainer.Unity;
 using World.Ground;
@@ -8,18 +9,21 @@ namespace Players
     public class PlayerController : 
         IPlayerController, 
         IInitializable, 
-        IObserver<GroundModel>, 
         IObservable<PlayerModel>,
+        IObserver<GroundModel>, 
+        IObserver<KeyboardKeyModel>,
         ITickable
     {
         private readonly PlayerModel _model;
         private readonly IPlayerView _view;
+        private readonly ProjectileFactory _projectileFactory;
         private DateTime _startTime;
 
         public event Action<PlayerModel> OnChange = _ => { };
 
-        public PlayerController(IPlayerView view)
+        public PlayerController(IPlayerView view, ProjectileFactory projectileFactory)
         {
+            _projectileFactory = projectileFactory;
             _view = view;
             _model = new PlayerModel();
             _model.OnTargetPositionChanged += UpdateTargetPosition;
@@ -56,7 +60,7 @@ namespace Players
             OnChange.Invoke(_model);
         }
 
-        public void Update(GroundModel model)
+        public void Notify(GroundModel model)
         {
             if (_model.IsDead) return;
             
@@ -67,15 +71,20 @@ namespace Players
         {
             if (_model.IsDead) return;
             
-            if (DateTime.Now > _startTime + TimeSpan.FromSeconds(1))
+            if (DateTime.Now > _startTime + TimeSpan.FromSeconds(10))
             {
                 _model.Health -= 1;
                 _startTime = DateTime.Now;
             }
         }
 
-        public void Dispose()
+        public void Notify(KeyboardKeyModel keyboardKeyModel)
         {
+            if (keyboardKeyModel.KeyCode != KeyCode.Space) return;
+
+            var direction = _model.TargetPosition - _view.GetCurrentWorldPosition();
+            var position = _view.GetCurrentWorldPosition() + direction.normalized;
+            _projectileFactory.Create(position, direction);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Players
 {
-    public interface IPlayerController : IDisposable
+    public interface IPlayerController
     {
     }
 }

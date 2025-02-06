@@ -1,19 +1,23 @@
-﻿using VContainer.Unity;
+﻿using System.Collections.Generic;
+using VContainer.Unity;
 
 namespace Inputs
 {
     public class InputSystem : ITickable
     {
-        private readonly IInputHandler _inputHandler;
+        private readonly IEnumerable<IInputHandler> _inputHandlers;
 
-        protected InputSystem(IInputHandler inputHandler)
+        protected InputSystem(IEnumerable<IInputHandler> inputHandlers)
         {
-            _inputHandler = inputHandler;
+            _inputHandlers = inputHandlers;
         }
 
         public void Tick()
         {
-            _inputHandler.HandleInput();
+            foreach (var inputHandler in _inputHandlers)
+            {
+                inputHandler.HandleInput();   
+            }
         }
     }
 }
