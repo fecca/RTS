@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace World.Houses
@@ -10,12 +11,12 @@ namespace World.Houses
         
         private Color _defaultColor;
         private IHouseController _controller;
-        private Material _material;
+        private IEnumerable<Material> _materials;
 
         private void Awake()
         {
-            _material = GetComponent<MeshRenderer>().material;
-            _defaultColor = _material.color;
+            _materials = GetComponentsInChildren<MeshRenderer>().Select(r => r.material);
+            _defaultColor = _materials.First().color;
         }
 
         public void SetController(IHouseController controller)
@@ -26,7 +27,10 @@ namespace World.Houses
         public void SetSelected(bool isSelected)
         {
             Debug.Log(isSelected);
-            _material.color = isSelected ? selectedColor : _defaultColor;
+            foreach (var material in _materials)
+            {
+                material.color = isSelected ? selectedColor : _defaultColor;   
+            }
         }
 
         public void InteractWith()
