@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Players
+namespace World.Players
 {
     public class PlayerModel
     {

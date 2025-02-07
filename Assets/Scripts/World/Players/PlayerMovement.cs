@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-namespace Players
+namespace World.Players
 {
     public class PlayerMovement : MonoBehaviour
     {

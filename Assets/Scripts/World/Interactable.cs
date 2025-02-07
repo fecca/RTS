@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace World.Ground
+namespace World
 {
     public class Interactable : MonoBehaviour, IInteractable
     {

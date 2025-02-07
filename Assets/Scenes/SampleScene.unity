@@ -410,8 +410,10 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  groundView: {fileID: 6577081185051052917, guid: 09c5d5267ade5b54388ef433e5a51185, type: 3}
-  playerView: {fileID: 5706196282383268193, guid: 7074991cd5b986e488470b67775bd86c, type: 3}
+  ground: {fileID: 6369840833968868303, guid: 09c5d5267ade5b54388ef433e5a51185, type: 3}
+  player: {fileID: 5211767132760638953, guid: 7074991cd5b986e488470b67775bd86c, type: 3}
+  projectile: {fileID: 2203830888792521299, guid: b6a6e11089f480040a12535b51df0d99, type: 3}
+  house: {fileID: 1274084364145532128, guid: 91b47b39721f9844d81eadaf6b9b85e8, type: 3}
 --- !u!4 &590669228
 Transform:
   m_ObjectHideFlags: 0

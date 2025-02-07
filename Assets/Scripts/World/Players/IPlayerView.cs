@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Players
+namespace World.Players
 {
     public interface IPlayerView : IWorldView<IPlayerController>
     {

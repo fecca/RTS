@@ -4,7 +4,7 @@ using UnityEngine;
 using VContainer.Unity;
 using World.Ground;
 
-namespace Players
+namespace World.Players
 {
     public class PlayerController : 
         IPlayerController, 
@@ -16,7 +16,10 @@ namespace Players
     {
         private readonly PlayerModel _model;
         private readonly IPlayerView _view;
+        
+        // Extract to attack component
         private readonly ProjectileFactory _projectileFactory;
+        
         private DateTime _startTime;
 
         public event Action<PlayerModel> OnChange = _ => { };

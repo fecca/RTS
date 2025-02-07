@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Players
+namespace World.Players
 {
     public class PlayerView : MonoBehaviour, IPlayerView
     {
